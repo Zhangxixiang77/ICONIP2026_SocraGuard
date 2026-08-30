@@ -1,0 +1,28 @@
+# ---- Secrets: never commit real API keys ----
+configs/api_keys.yaml
+.env
+*.key
+*.pem
+
+# ---- Experiment outputs ----
+results/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# ---- OS / editors ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

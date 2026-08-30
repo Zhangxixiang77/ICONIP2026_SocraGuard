@@ -1,0 +1,21 @@
+# Core dependencies (always required)
+openai>=1.40.0
+pyyaml>=6.0
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.7
+seaborn>=0.13
+tqdm>=4.65
+tenacity>=8.2
+scipy>=1.10
+scikit-learn>=1.3
+lifelines>=0.27
+
+# Optional: HuggingFace seed loaders (--use-hf in 01_build_benchmark.py)
+# datasets>=2.14
+
+# Optional: D4 Validator training (GPU strongly recommended)
+# torch>=2.0
+# transformers>=4.40
+# peft>=0.10
+# accelerate>=0.27
