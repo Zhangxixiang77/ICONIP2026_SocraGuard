@@ -1,0 +1,39 @@
+# API key configuration template
+# Copy to api_keys.yaml and fill in your keys.
+# api_keys.yaml is gitignored — never commit it.
+#
+# ---------- LNCS-targeting profile (full experiment) ----------
+
+# OpenRouter — handles Claude 3.5 Sonnet, GPT-4o, GPT-4o-mini under one key
+# Sign up: https://openrouter.ai
+# Funding:  PayPal, Stripe (USD)
+openrouter:
+  api_key: "sk-or-v1-..."
+  base_url: "https://openrouter.ai/api/v1"
+
+# DeepSeek — Chinese, RMB payment, very cheap
+# Sign up: https://platform.deepseek.com
+deepseek:
+  api_key: "sk-..."
+  base_url: "https://api.deepseek.com/v1"
+
+# Aliyun DashScope — for Qwen2.5-72B
+# Sign up: https://dashscope.aliyun.com
+dashscope:
+  api_key: "sk-..."
+  base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+
+# ---------- MVP profile (DeepSeek + MiniMax + GLM) ----------
+
+# MiniMax (only used in MVP profile)
+# Sign up: https://platform.minimaxi.com
+# Domestic users: api.minimaxi.com   |   International: api.minimax.io
+minimax:
+  api_key: "sk-..."
+  base_url: "https://api.minimaxi.com/v1"
+
+# Zhipu AI (GLM-4-Flash is permanently free)
+# Sign up: https://open.bigmodel.cn
+zhipu:
+  api_key: "..."
+  base_url: "https://open.bigmodel.cn/api/paas/v4"

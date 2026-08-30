@@ -1,0 +1,66 @@
+# LNCS-targeting model configuration
+# 4 tutors + 3 judges, total budget ~¥2400
+#
+# Strategy:
+# - Claude 3.5 Sonnet doubles as tutor + judge (essential for SOTA validity)
+# - GPT-4o serves as JUDGE ONLY (cost optimization, no tutor coverage)
+# - DeepSeek-V3 doubles as tutor + judge
+# - Qwen2.5-72B + GPT-4o-mini complete the tutor set
+#
+# Cross-source judging is enforced: each tutor's outputs are scored
+# only by judges from a different provider.
+
+backends:
+  # --- TUTORS (appear in Table 2 main results) ---
+
+  claude_sonnet:
+    provider: openrouter
+    model_id: "anthropic/claude-3.5-sonnet"
+    role: tutor_and_judge
+    notes: "Western SOTA. Doubles as judge for non-Anthropic tutors."
+
+  gpt4o_mini:
+    provider: openrouter
+    model_id: "openai/gpt-4o-mini"
+    role: tutor
+    notes: "Small-model size diversity."
+
+  deepseek:
+    provider: deepseek
+    model_id: "deepseek-chat"
+    role: tutor_and_judge
+    notes: "Chinese flagship. Doubles as judge for non-DeepSeek tutors."
+
+  qwen_72b:
+    provider: dashscope
+    model_id: "qwen2.5-72b-instruct"
+    role: tutor
+    notes: "Chinese open-source representative."
+
+  # --- JUDGE ONLY ---
+
+  gpt4o_judge:
+    provider: openrouter
+    model_id: "openai/gpt-4o"
+    role: judge
+    notes: "GPT-4o as judge only — SOTA judging credibility without per-tutor cost."
+
+  # --- SUPPLEMENTARY (optional, for §7.5) ---
+
+  minimax:
+    provider: minimax
+    model_id: "MiniMax-M2.7"
+    role: supplementary_tutor
+    notes: "Optional. Reuses MVP data if available."
+
+defaults:
+  temperature: 0.0
+  max_tokens: 1024
+  timeout_seconds: 90
+  max_retries: 4
+  retry_backoff_seconds: 2
+
+judge_protocol:
+  judges: [claude_sonnet, gpt4o_judge, deepseek]
+  exclude_same_provider: true
+  min_judges_per_dialogue: 2

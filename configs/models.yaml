@@ -1,0 +1,54 @@
+# Backend configurations.
+# Each entry maps a logical name to a (provider, model_id) pair.
+# Provider names must match keys in api_keys.yaml.
+#
+# To add a new backend (e.g., Qwen, GPT-4o), just add an entry here
+# and (if needed) add the corresponding provider in api_keys.yaml.
+
+backends:
+  # ---- MVP-stage tutors ----
+  deepseek:
+    provider: deepseek
+    model_id: "deepseek-chat"
+    role: tutor
+    notes: "DeepSeek-V3 family"
+
+  minimax:
+    provider: minimax
+    model_id: "MiniMax-M2.7"
+    role: tutor
+    notes: "Standard tier. Exact model name (case + hyphen) required.
+            Use 'MiniMax-M2.7-highspeed' for 2x speed at 2x cost."
+
+  # ---- Free-tier judge / aux model ----
+  glm_flash:
+    provider: zhipu
+    model_id: "glm-4-flash"
+    role: judge
+    notes: "Free tier, used as third-party judge"
+
+  # ---- Expansion-phase models (commented out for MVP) ----
+  # glm_5:
+  #   provider: zhipu
+  #   model_id: "glm-4-plus"
+  #   role: tutor
+  #
+  # qwen_plus:
+  #   provider: dashscope
+  #   model_id: "qwen-plus"
+  #   role: tutor
+
+# Default LLM call parameters
+defaults:
+  temperature: 0.0
+  max_tokens: 1024
+  timeout_seconds: 60
+  max_retries: 3
+  retry_backoff_seconds: 2
+
+# Cross-source judge protocol:
+# Each tutor is judged by all NON-same-provider judges.
+# This avoids self-evaluation bias.
+judge_protocol:
+  judges: [deepseek, minimax, glm_flash]
+  exclude_same_provider: true
